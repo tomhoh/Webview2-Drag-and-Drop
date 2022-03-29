@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+    <style>
+        .box {
+            min-height: 100px;
+            background-color: #0080ff;
+            color: #FFF;
+            margin-bottom: 30px;
+        }
+    </style>
+
+    <div class="box" id="box1"> box1</div>
+    <div class="box" id="box2"> box2</div>
+    <div class="box" id="box3"> box3</div>
+
+    <script>
+
+        var temp_dropPath = "";//open window, C# will change 「temp_dropPath」
+
+        /**
+         * Get the dragged file path
+         * @returns
+         */
+        async function getDropPath() {
+
+            let _dropPath = "";
+            for (let i = 0; i < 100; i++) {
+
+                if (temp_dropPath !== "") {
+                    _dropPath = temp_dropPath;
+                    _dropPath = decodeURIComponent(temp_dropPath)
+                    if (_dropPath.indexOf("file:///") === 0) {//  file:///C:/b.jpg -> C:/b.jpg
+                        _dropPath = _dropPath.substring(8);
+                    } else if (_dropPath.indexOf("file://") === 0) {// file://Desktop-abc/AA/b.jpg -> //Desktop-abc/AA/b.jpg
+                        _dropPath = _dropPath.substring(5);
+                    }
+                    break;
+                }
+                await Lib.Sleep(10);
+            }
+            temp_dropPath = "";
+            _dropPath = _dropPath.replace(/[/]/g, "\\");
+            return _dropPath;
+        }
+
+
+
+        addDropEvent(document.getElementById("box1"))
+        addDropEvent(document.getElementById("box2"))
+        addDropEvent(document.getElementById("box3"))
+
+        function addDropEvent(dom) {
+
+            dom.addEventListener("dragenter", dragenter, false);
+            dom.addEventListener("dragover", dragover, false);
+            dom.addEventListener("drop", drop, false);
+
+            function dragenter(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+            function dragover(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+            async function drop(e) {
+
+                if (e.dataTransfer === null) { return; }
+
+                let files = e.dataTransfer.files;
+
+                let _dropPath = await getDropPath();
+                if (_dropPath === "") { return; }
+
+                if (files.length > 1) {
+                    let dirPath = Lib.GetDirectoryName(_dropPath);
+                    let html = "";
+                    for (let i = 0; i < files.length; i++) {
+                        const item = files[i];
+                        html += `<p>${Lib.Combine([dirPath, item.name])}<p>`;
+                    }
+                    dom.innerHTML = html;
+                } else {
+                    dom.innerHTML = _dropPath;
+                }
+
+                e.stopPropagation();
+                e.preventDefault();
+            }
+
+        }
+    </script>
+
+
+    <script>
+        class Lib {
+
+            static async Sleep(ms) {
+                await new Promise((resolve, reject) => {
+                    setTimeout(function () {
+                        resolve(0);
+                    }, ms);
+                })
+            }
+
+
+            static GetDirectoryName = (path) => {
+                path = path.replace(/[/]/ig, "\\");
+
+                let count = path.split("\\").length - 1;// count 「\」
+
+                if (count === 0) { return null; }
+                if (path.length <= 2) { return null; }
+
+                if (path.substring(0, 2) === "\\\\") {//ex \\Desktop-abc\AA
+                    if (count <= 3) {//At least 2 layers
+                        return null;
+                    }
+                    if (count === 4) {
+                        if (path.lastIndexOf("\\") === path.length - 1) {//ex \\Desktop-abc\AA\
+                            return null;
+                        }
+                    }
+                } else {
+                    if (count === 1) {
+                        if (path.lastIndexOf("\\") === path.length - 1) {//ex D:/
+                            return null;
+                        }
+                    }
+                }
+
+                let name = path.substring(0, path.lastIndexOf("\\"));//get Dir path
+
+                //avoid  D:\ to D:
+                count = name.split("\\").length - 1;
+                if (count === 0) {
+                    name = name + "\\";
+                }
+
+                return name;
+            }
+
+
+            static Combine = (arPath) => {
+                if (arPath.length === 0) { return "" }
+                if (arPath.length === 1) { return arPath[0] }
+
+                let sum = arPath[0];
+                sum = sum.replace(/[\\]+$/, '');
+                sum += "\\"
+
+                for (let i = 1; i < arPath.length; i++) {
+                    let item = arPath[i];
+                    item = item.replace(/^([\\])+/, '');
+                    item = item.replace(/[\\]+$/, '');
+                    sum += item
+                    if (i != arPath.length - 1) { sum += "\\"; }
+                }
+                return sum
+            }
+
+        }
+    </script>
+</body>
+</html>

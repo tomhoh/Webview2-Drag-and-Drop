@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+</head>
+
+<body>
+
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: #0080ff;
+        }
+    </style>
+
+    <div id="box">
+        File
+    </div>
+
+    <script>
+
+        var WV_File = window.chrome.webview.hostObjects.WV_File;
+
+        var box = document.getElementById("box");
+        box.addEventListener("mousedown", (e) => {
+            if (typeof e === 'object') {
+                switch (e.button) {
+                    case 0:
+                        WV_File.DragDropFile("C:/Users/tomho/Desktop/ttt.wepd")
+                        
+                        break;
+                    case 1:
+                        //log.textContent = 'Middle button clicked.';
+                        break;
+                    case 2:
+                        //log.textContent = 'Right button clicked.';
+                        break;
+                    default:
+                        //log.textContent = `Unknown button code: ${e.button}`;
+                }
+            }
+            
+        });
+    </script>
+
+</body>
+</html>
