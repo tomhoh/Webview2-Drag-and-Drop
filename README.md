@@ -1,4 +1,4 @@
-# WebView2 Drag and Drop DataObject
+# WebView2 Drag and Drop DataObject Example
 
 This example was taken from [Webview2Feedback issue #2313](https://github.com/MicrosoftEdge/WebView2Feedback/issues/2313).
 
@@ -12,7 +12,7 @@ This project consist of two examples.
 
 ## Explanation
 
-Drag the file to webview2 will "open window".  
+Dragging a file to webview2 will "open window".  
 Intercept "open window" in C# `wv2.CoreWebView2.NewWindowRequested`, get the file path,  
 And use `wv2.CoreWebView2.ExecuteScriptAsync` to send this file path to the web page.  
-"open window" is an asynchronous processing behavior, so in js I use `await Lib.Sleep()` to wait until the global variable `var temp_dropPath` is changed.
+"open window" is an asynchronous processing behavior, so in js use `await Lib.Sleep()` to wait until the global variable `var temp_dropPath` is changed.
