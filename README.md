@@ -1,6 +1,6 @@
 # WebView2 Drag and Drop DataObject
 
-This example was taken from [Webview2Feedback issue #2313]([File drag and drop from WebView2 · Issue #2313 · MicrosoftEdge/WebView2Feedback · GitHub](https://github.com/MicrosoftEdge/WebView2Feedback/issues/2313)).
+This example was taken from [Webview2Feedback issue #2313](https://github.com/MicrosoftEdge/WebView2Feedback/issues/2313).
 
 Drag and drop to and from Webview2 control dataobject example.  
 This project consist of two examples.
