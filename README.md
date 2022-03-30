@@ -1,4 +1,4 @@
-#WebView2 Drag and Drop DataObject
+# WebView2 Drag and Drop DataObject
 
 This example was taken from [Webview2Feedback issue #2313]([File drag and drop from WebView2 · Issue #2313 · MicrosoftEdge/WebView2Feedback · GitHub](https://github.com/MicrosoftEdge/WebView2Feedback/issues/2313)).
 
@@ -10,7 +10,7 @@ This project consist of two examples.
 - Form 2. When drag and drop to a Webview the new window request is handled blocking the normal browser behavior of opening a new window and instead returns the file path of the dropped path.
   
 
-##Explanation
+## Explanation
 
 Drag the file to webview2 will "open window".  
 Intercept "open window" in C# `wv2.CoreWebView2.NewWindowRequested`, get the file path,  
