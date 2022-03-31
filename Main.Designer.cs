@@ -32,6 +32,8 @@ namespace Webview_Drag_and_Drop
             this.Form1Button = new System.Windows.Forms.Button();
             this.Form2Button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Form1Button
@@ -74,11 +76,34 @@ namespace Webview_Drag_and_Drop
             this.label1.TabIndex = 2;
             this.label1.Text = "WebView2 Drag and Drop Dataobject Example";
             // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(203, 116);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(420, 81);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "The normal drap and drop to webview2 with the typical browser handling. Drag and " +
+    "drop from webview returns the dataobject file path.";
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(203, 275);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(420, 81);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "When drag and drop to a Webview the new window request is handled blocking the no" +
+    "rmal browser behavior of opening a new window and instead returns the file path " +
+    "of the dropped path.";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Form2Button);
             this.Controls.Add(this.Form1Button);
@@ -94,5 +119,7 @@ namespace Webview_Drag_and_Drop
         private System.Windows.Forms.Button Form1Button;
         private System.Windows.Forms.Button Form2Button;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
