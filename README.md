@@ -7,7 +7,7 @@ This project consist of two examples.
 
 - Form 1. The normal drap and drop to webview2 with the typical browser handling. Drag and drop from webview returns the dataobject file path.
   
-- Form 2. When drag and drop to a Webview the new window request is handled blocking the normal browser behavior of opening a new window and instead returns the file path of the dropped path.
+- Form 2. When drag and drop to a Webview the new window request is handled blocking the normal browser behavior of opening a new window and instead returns the file path of the dropped object.
   
 
 ## Explanation
